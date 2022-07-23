@@ -1,0 +1,3 @@
+[submodule "project-aleph-frontend"]
+	path = project-aleph-frontend
+	url = https://github.com/gojoGS/project-aleph-frontend.git

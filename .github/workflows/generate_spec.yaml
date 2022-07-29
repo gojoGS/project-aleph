@@ -1,0 +1,26 @@
+name: Generate frontend client
+
+on:
+    push:
+        branches:
+            - dev
+        paths:
+            - "backend/src/**"
+
+jobs:
+    phpunit:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Generate openapi spec
+              working-directory: ./backend
+              run: ./mvnw clean verify -DskipTests
+            - name: Generate frontend lib
+              working-directory: ./frontend
+              run: yarn generateApiClient
+            - name: Commit spec and client
+              run: |
+                  git config --global user.name 'Your Name'
+                  git config --global user.email 'your-username@users.noreply.github.com'
+                  git commit -am "push frontend client"
+                  git push

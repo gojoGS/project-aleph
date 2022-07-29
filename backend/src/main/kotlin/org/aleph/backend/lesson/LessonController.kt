@@ -43,6 +43,6 @@ class LessonController @Autowired constructor(
 }
 
 data class CreateLessonRequest(
-    @NotBlank @Size(max = 254) val title: String,
+    @NotBlank @Size(max = 255) val title: String,
     @NotBlank @Size(max = 255) val description: String,
 )

@@ -1,0 +1,11 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+
+    <g>
+        <title>Layer 1</title>
+        <ellipse stroke-width="0" ry="299" rx="299" id="svg_1" cy="299.99999" cx="400"
+                 stroke="#7d893f" fill="#a81abf"/>
+        <text transform="matrix(29.6784, 0, 0, 29.6784, -8374.76, -7178.7)" xml:space="preserve"
+              text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_2" y="258.73863"
+              x="288.12766" stroke-width="0" stroke="#7d893f" fill="#ffffff">ℵ</text>
+    </g>
+</svg>

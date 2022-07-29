@@ -35,14 +35,14 @@ class LessonController @Autowired constructor(
         return ResponseEntity.ok(updatedLessonEntity)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idea}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable id: Long) {
-        lessonService.delete(id)
+    fun delete(@PathVariable idea: Long) {
+        lessonService.delete(idea)
     }
 }
 
 data class CreateLessonRequest(
-    @NotBlank @Size(max = 254) val title: String,
+    @NotBlank @Size(max = 255) val title: String,
     @NotBlank @Size(max = 255) val description: String,
 )

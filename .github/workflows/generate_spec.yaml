@@ -20,6 +20,9 @@ jobs:
             - name: Generate openapi spec
               working-directory: ./backend
               run: ./mvnw clean verify -DskipTests
+            - name: Install deps
+              working-directory: ./frontend
+              run: yarn
             - name: Generate frontend lib
               working-directory: ./frontend
               run: yarn generateApiClient

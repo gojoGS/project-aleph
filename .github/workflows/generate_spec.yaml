@@ -28,7 +28,8 @@ jobs:
               run: yarn generateApiClient
             - name: Commit spec and client
               run: |
-                  git config --global user.name 'Your Name'
-                  git config --global user.email 'your-username@users.noreply.github.com'
-                  git commit -am "push frontend client"
+                  git config user.email "actions@github.com"
+                  git config user.name "GitHub Actions - update spec"
+                  git add -A
+                  git commit -m "push frontend client"
                   git push

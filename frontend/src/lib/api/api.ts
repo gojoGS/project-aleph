@@ -105,15 +105,15 @@ export const LessonControllerApiAxiosParamCreator = function (configuration?: Co
     return {
         /**
          * 
-         * @param {number} id 
+         * @param {number} idea 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        _delete: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('_delete', 'id', id)
-            const localVarPath = `/lesson/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        _delete: async (idea: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'idea' is not null or undefined
+            assertParamExists('_delete', 'idea', idea)
+            const localVarPath = `/lesson/{idea}`
+                .replace(`{${"idea"}}`, encodeURIComponent(String(idea)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -284,12 +284,12 @@ export const LessonControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {number} id 
+         * @param {number} idea 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async _delete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator._delete(id, options);
+        async _delete(idea: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._delete(idea, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -344,12 +344,12 @@ export const LessonControllerApiFactory = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @param {number} id 
+         * @param {number} idea 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        _delete(id: number, options?: any): AxiosPromise<void> {
-            return localVarFp._delete(id, options).then((request) => request(axios, basePath));
+        _delete(idea: number, options?: any): AxiosPromise<void> {
+            return localVarFp._delete(idea, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -399,13 +399,13 @@ export const LessonControllerApiFactory = function (configuration?: Configuratio
 export class LessonControllerApi extends BaseAPI {
     /**
      * 
-     * @param {number} id 
+     * @param {number} idea 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LessonControllerApi
      */
-    public _delete(id: number, options?: AxiosRequestConfig) {
-        return LessonControllerApiFp(this.configuration)._delete(id, options).then((request) => request(this.axios, this.basePath));
+    public _delete(idea: number, options?: AxiosRequestConfig) {
+        return LessonControllerApiFp(this.configuration)._delete(idea, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

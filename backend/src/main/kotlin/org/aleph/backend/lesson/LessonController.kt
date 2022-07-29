@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 @RestController
-@RequestMapping("/lesson")
+@RequestMapping("/lesson", produces = ["application/json"], consumes = ["application/json"])
 class LessonController @Autowired constructor(
     private val lessonService: LessonService
 ) {

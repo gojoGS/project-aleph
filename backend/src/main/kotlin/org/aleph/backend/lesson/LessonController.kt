@@ -9,7 +9,8 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 @RestController
-@RequestMapping("/lesson", produces = ["application/json"], consumes = ["application/json"])
+@CrossOrigin(originPatterns = ["*"], maxAge = 3600, allowCredentials = "true")
+@RequestMapping("/lesson", produces = ["application/json"])
 class LessonController @Autowired constructor(
     private val lessonService: LessonService
 ) {

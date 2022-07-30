@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
-    <changeSet id="1" author="gojoGS">
+    <changeSet id="2.0" author="gojoGS">
         <createTable tableName="lesson">
             <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true"/>
@@ -21,7 +21,14 @@
             <column name="date_last_updated" type="date">
                 <constraints nullable="false"/>
             </column>
+            <column name="module_id" type="bigint" >
+                <constraints nullable="false" />
+            </column>
         </createTable>
+        
+        <addForeignKeyConstraint baseTableName="lesson" baseColumnNames="module_id"
+                                 constraintName="lesson_fk_module"
+                                 referencedTableName="module" referencedColumnNames="id" />
 
         <rollback>
             <dropTable tableName="lesson"/>

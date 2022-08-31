@@ -1,0 +1,7 @@
+input:not(:focus):not(:placeholder-shown):invalid {
+    border-color: hsl(var(--er));
+}
+
+input:not(:focus):not(:placeholder-shown):valid {
+    border-color: hsl(var(--su));
+}

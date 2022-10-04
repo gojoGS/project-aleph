@@ -34,10 +34,12 @@
 <style lang="scss">
     header {
         display: flex;
+        background-color: white;
         flex-direction: row;
         align-items: center;
         padding: 0rem 1rem;
         width: 100%;
+        box-shadow: 0 4px 10px 0 #0002;
     }
 
     .logo {

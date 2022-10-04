@@ -1,28 +1,24 @@
-<script context="module">
-    /** @type {import('./__types/[slug]').Load} */
-    export async function load({ fetch }) {
-        const response = await fetch('/modules.json');
-        const { modules } = await response.json();
+<script context="module" lang="ts">
+    import type { Module } from '$lib/store/types';
+    import type { Load } from '@sveltejs/kit';
+    export const load: Load = async ({ fetch }) => {
+        const response = await fetch('http://localhost:8080/module', {
+            method: 'GET',
+        });
 
-        if (response.ok) {
-            return {
-                props: {
-                    modules,
-                },
-            };
-        }
+        const body: Module[] = (await response.json()) as Module[];
 
         return {
             status: response.status,
-            error: new Error("Couldn't fetch modules"),
+            props: {
+                modules: body,
+            },
         };
-    }
+    };
 </script>
 
 <script lang="ts">
-    import type { ModuleBase } from '$lib/model/module';
-
-    export let modules: ModuleBase[];
+    export let modules: Module[] = [];
 </script>
 
 <svelte:head>
@@ -30,7 +26,6 @@
 </svelte:head>
 
 <div class="container">
-    <h1>Modules</h1>
     {#each modules as module}
         <a href="{`/modules/${module.id}`}">{module.title}</a>
     {/each}

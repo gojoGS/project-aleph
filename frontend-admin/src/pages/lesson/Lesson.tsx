@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import rehypeRaw from "rehype-raw";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
@@ -11,13 +7,26 @@ import { delay, DelayLength } from "../../util/promise";
 import { ROUTE_MODULES, routeModuleFactory } from "../../routes/routes";
 import { getLessonById, getModuleById } from "../../util/mock";
 import { truncate } from "../../util/text";
-import stringSimilarity from "string-similarity-js";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import Preview from "../../components/Preview";
+import MDEditor from "@uiw/react-md-editor";
 
 const Lesson: React.FC = () => {
     const { lessonId: lessonIdParam, moduleId: moduleIdParam } = useParams();
     const [textAreaContent, setTextAreaContent] = useState("");
+    const [rawMarkdown, setRawMarkdown] = useState("");
+    const [markdown, setMarkdown] = useState("");
+
     const [lastSaved, setLastSaved] = useState("");
+
+    useEffect(() => {
+        const renderTimeOutId = setTimeout(
+            () => setRawMarkdown(textAreaContent),
+            1200
+        );
+
+        return () => clearTimeout(renderTimeOutId);
+    }, [textAreaContent]);
 
     if (!lessonIdParam || !moduleIdParam) {
         return <Navigate to={ROUTE_MODULES} />;
@@ -63,55 +72,25 @@ const Lesson: React.FC = () => {
                 <Link to={routeModuleFactory(moduleId)}>{module.title}</Link>
                 <span>{lesson.title}</span>
             </Breadcrumbs>
-            <div className={"max-w-5xl flex flex-col items-center"}>
-                <h2 className={"text-base-content font-bold text-2xl"}>
-                    {lesson.title}
-                </h2>
-                <p>{truncate(lesson.description, 128)}</p>
-            </div>
-
             <div
                 className={
                     "flex flex-col md:flex-row w-full max-w-[1800px] gap-6 h-3/4"
                 }
             >
-                <textarea
-                    onBlur={onInput}
+                <MDEditor
+                    value={markdown}
+                    onChange={(value, event, state) => setMarkdown(value ?? "")}
+                    height={"40rem"}
+                    maxHeight={550}
                     className={
-                        "textarea text-lg resize-none md:w-1/2  h-[50vh] mx-2 overflow-scroll"
+                        // "textarea text-lg resize-none md:w-1/2  h-[50vh] mx-2 overflow-scroll"
+                        "md:w-full"
                     }
                 />
-                <ReactMarkdown
-                    className={
-                        "prose prose-xl prose-pre:bg-[#282828] md:w-1/2 h-[50vh] mx-2 overflow-y-scroll overflow-x"
-                    }
-                    rehypePlugins={[rehypeRaw]}
-                    components={{
-                        code({ node, inline, className, children, ...props }) {
-                            const match = /language-(\w+)/.exec(
-                                className || ""
-                            );
-                            return !inline && match ? (
-                                <SyntaxHighlighter
-                                    children={String(children).replace(
-                                        /\n$/,
-                                        ""
-                                    )}
-                                    //@ts-ignore
-                                    style={gruvboxDark}
-                                    language={match[1]}
-                                    PreTag="div"
-                                    {...props}
-                                />
-                            ) : (
-                                <code className={className} {...props}>
-                                    {children}
-                                </code>
-                            );
-                        },
-                    }}
-                    children={textAreaContent}
-                />
+                {/*<Preview*/}
+                {/*    rawMarkdown={rawMarkdown}*/}
+                {/*    className={"md:w-1/2 h-[50vh] mx-2"}*/}
+                {/*/>*/}
             </div>
 
             <div

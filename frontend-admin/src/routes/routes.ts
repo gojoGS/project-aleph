@@ -4,6 +4,9 @@ export const ROUTE_LOGIN = "/login";
 export const ROUTE_LOGOUT = "/logout";
 
 export const ROUTE_PROFILE = "/profile";
+export const ROUTE_PROFILE_SETTINGS = ROUTE_PROFILE + "/settings";
+export const ROUTE_PROFILE_CHANGE_PASSWORD = ROUTE_PROFILE + "/change-password";
+export const ROUTE_PROFILE_LOGOUT = ROUTE_PROFILE + "/logout";
 
 export const ROUTE_MODULES = "/module";
 export const ROUTE_MODULE = ROUTE_MODULES + "/:moduleId";
